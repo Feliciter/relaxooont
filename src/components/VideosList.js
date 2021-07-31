@@ -55,18 +55,10 @@ const VideosList = () => {
   }
 
   const retrieveVideos = () => {
-    const p = getRequestParams(searchPhrase)
     console.log(searchPhrase)
 
     const params = {
-      part: 'snippet',
-      eventType: 'none',
       q: searchPhrase,
-      type: 'video',
-      videoDefinition: 'high',
-      videoEmbeddable: true,
-      videoLicense: 'creativeCommon',
-      videoSyndicated: true,
     }
 
     console.log(params)
