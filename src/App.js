@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment, Suspense, lazy } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -8,6 +8,13 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuNav from './menu'
 import VideosList from './components/VideosList'
+
+import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import theme from './theme'
+import GlobalStyles from './GlobalStyles'
+import Pace from './shared/components/Pace'
+import VGallery from './components/VGallery'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,25 +27,29 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }))
+const LoggedOutComponent = lazy(() => import('./logged_out/components/Main'))
 
-export default function App() {
-  const classes = useStyles()
-
+const App = () => {
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          {/*<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">*/}
-          {/*  /!*<MenuIcon />*!/*/}
-          {/*  <MenuNav />*/}
-          {/*</IconButton>*/}
-          <Typography variant="h6" className={classes.title}>
-            Relaxoont
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
-      <VideosList />
-    </div>
+    <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <GlobalStyles />
+        <Pace color={theme.palette.primary.light} />
+        <Suspense fallback={<Fragment />}>
+          <Switch>
+            {/*<Route path="/c">*/}
+            {/*  <LoggedInComponent />*/}
+            {/*</Route>*/}
+            <Route>
+              <LoggedOutComponent />
+              {/*<VGallery />*/}
+            </Route>
+          </Switch>
+        </Suspense>
+      </MuiThemeProvider>
+    </BrowserRouter>
   )
 }
+
+export default App

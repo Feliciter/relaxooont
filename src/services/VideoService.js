@@ -1,7 +1,7 @@
 import http from './web-api/http-common'
-const YOUTUBE_APIKEY = process.env.REACT_APP_YAPI
+const YOUTUBE_APIKEY = process.env.REACT_APP_YOUTUBE_APIKEY
 
-const GetVideosByQuery = (params) => {
+const getVideosByQuery = (params) => {
   params['key'] = YOUTUBE_APIKEY
   params['part'] = 'snippet'
   params['eventType'] = 'none'
@@ -14,4 +14,4 @@ const GetVideosByQuery = (params) => {
   return http.get(`/search`, { params })
 }
 
-export default GetVideosByQuery
+export default getVideosByQuery

@@ -9,7 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
-import GetVideosByQuery from '../services/VideoService'
+import getVideosByQuery from '../services/VideoService'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +63,7 @@ const VideosList = () => {
 
     console.log(params)
 
-    GetVideosByQuery(params)
+    getVideosByQuery(params)
       .then((response) => {
         const { items } = response.data
         console.log(response.data)
